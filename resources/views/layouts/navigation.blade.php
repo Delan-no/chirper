@@ -52,6 +52,10 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+                        <x-dropdown-link>
+                            <a href="{{ route('change.language', 'fr') }}">Français</a> | <a
+                            href="{{ route('change.language', 'en') }}">Anglais</a> <br><br>
+                        </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -74,12 +78,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            {{-- chirps.index --}}
+            <x-responsive-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
+                {{ __('Chirps') }}
+            </x-responsive-nav-link>
         </div>
 
-        {{-- chirps.index --}}
-        <x-responsive-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
-            {{ __('Chirps') }}
-        </x-responsive-nav-link>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

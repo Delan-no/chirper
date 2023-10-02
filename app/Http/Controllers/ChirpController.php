@@ -7,25 +7,19 @@ use Illuminate\Http\Request;
 
 class ChirpController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+ 
     public function index()
     {
-        return view("chirps.index");
+        return view("chirps.index", [
+            'chirps' => Chirp::orderBy('created_at', 'DESC')->get(),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -37,35 +31,37 @@ class ChirpController extends Controller
         return redirect(route('chirps.index'));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Chirp $chirp)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Chirp $chirp)
     {
-        //
+        return view('chirps.edit', ['chirp' => $chirp]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Chirp $chirp)
     {
-        //
+        // vérifier que l'utilisateur a l'autorization de mettre à jour le commentaire
+        $this->authorize('update', $chirp);
+        $validated = $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+ 
+        $chirp->update($validated);
+ 
+        return redirect(route('chirps.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Chirp $chirp)
     {
-        //
+        // vérifier l'autroisation du user
+        $this->authorize('delete', $chirp);
+        // supprimer la resource
+        $chirp->delete();
+        // rediriger vers la page des commentaires
+        return redirect(route('chirps.index'));
     }
+    
 }

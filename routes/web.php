@@ -24,7 +24,7 @@ require __DIR__.'/auth.php';
 
 
 Route::resource('chirps', ChirpController::class)
-        ->only(['index', 'store'])
+        ->only(['index', 'store', 'edit', 'update','destroy'])
         ->middleware(['auth', 'verified']);
         
 Route::get('/change-language/{locale}', [LanguageController::class, "changeLanguage"])->name('change.language');

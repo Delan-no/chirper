@@ -35,8 +35,18 @@ composants simples ne prenant aucun paramètre
 
 `setLocale`: fonction qui change la langue de l'application
 
+`auth()->user()`: permet de recupérer l'utilisateur connecté
+
 ## Mass assignation
 
 La mass assignation est une techniuqe qui permet de définir plusieurs attributs d'un modèle en une seule fois. Par exemple, imaginez que vous avez un modèle `Utilisateur` avec des champs tels que `nom`, `email`, `rôle`. la mass assignation permet de définir tous ces champs en une fois, ce qui peut être très pratique et vous faire gagner du temps.
 
 Cependant, dsi elle n'est pas gérée avec précaution, la mass assignation peut entrîner une vulnérabilité de sécurité appelée "over-posting" ou "vulnérabilité de mass assignation".
+
+## Les étapes de création d'une notification
+
+1. créer une notification (sms, email, slack...)
+2. créer un événement 
+3. Dispatcher un événement
+4. Créer un Event Listener
+5. Lier l'Event Listener à l'événement créé
